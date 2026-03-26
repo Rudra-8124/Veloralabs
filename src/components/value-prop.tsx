@@ -31,7 +31,7 @@ export default function ValueProp() {
             whileInView={{ opacity: 1, x: 0, scale: 1, filter: "blur(0px)" }}
             viewport={{ once: false, margin: "-50px" }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] as any }}
-            className="lg:w-5/12 sticky top-32"
+            className="lg:w-5/12 mb-8 lg:mb-0"
           >
             <h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 leading-[1.05]">
               We don't just <br/>

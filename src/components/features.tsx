@@ -48,22 +48,24 @@ export default function Features() {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 md:gap-y-16">
           {features.map((feature, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 50, scale: 0.95, filter: "blur(10px)" }}
+              initial={{ opacity: 0, y: 30, scale: 0.98, filter: "blur(8px)" }}
               whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
               viewport={{ once: false, margin: "-50px" }}
-              transition={{ duration: 0.8, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] as any }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="p-10 rounded-[2.5rem] bg-white border border-black/5 hover:border-black/10 transition-all duration-500 shadow-sm hover:shadow-xl hover:shadow-black/5 group"
+              transition={{ duration: 0.6, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] as any }}
+              whileHover={{ x: 10 }}
+              className="flex flex-row items-start gap-6 group cursor-default"
             >
-              <div className="w-12 h-12 rounded-2xl bg-white border border-black/10 flex items-center justify-center text-black mb-6 shadow-sm group-hover:scale-110 transition-transform">
+              <div className="w-12 h-12 shrink-0 rounded-2xl bg-[#fafafa] border border-black/5 flex items-center justify-center text-black shadow-sm group-hover:bg-black group-hover:text-white transition-all duration-300">
                 {feature.icon}
               </div>
-              <h3 className="text-xl font-semibold text-black mb-3">{feature.title}</h3>
-              <p className="text-black/60 font-medium leading-relaxed">{feature.description}</p>
+              <div className="flex flex-col">
+                <h3 className="text-xl md:text-2xl font-bold text-black mb-2 tracking-tight group-hover:translate-x-1 transition-transform duration-300">{feature.title}</h3>
+                <p className="text-black/40 text-sm md:text-base font-medium leading-relaxed max-w-sm">{feature.description}</p>
+              </div>
             </motion.div>
           ))}
         </div>

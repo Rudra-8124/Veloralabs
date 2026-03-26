@@ -29,12 +29,7 @@ export default function Hero() {
     return () => clearTimeout(timer)
   }, [text, isDeleting])
 
-  const anim = {
-    initial: { opacity: 0, y: 30, scale: 0.95, filter: "blur(10px)" },
-    whileInView: { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" },
-    viewport: { once: false, margin: "-50px" },
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as any }
-  }
+
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -89,13 +84,14 @@ export default function Hero() {
       </div>
 
       <div className="container mx-auto px-6 md:px-12 relative z-10 text-center">
-        <motion.div
-          initial={anim.initial}
-          whileInView={anim.whileInView}
-          viewport={anim.viewport as any}
-          transition={anim.transition}
-          className="max-w-5xl mx-auto"
-        >
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, margin: "-50px" }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] as any }}
+            style={{ willChange: "transform, opacity" }}
+          >
           <motion.div 
             initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
             whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
@@ -107,16 +103,15 @@ export default function Hero() {
             <span>Built different.</span>
           </motion.div>
           
-          <h1 className="text-6xl md:text-8xl lg:text-[7.5rem] font-bold tracking-tighter text-black mb-6 leading-[1.05] min-h-[1em]">
-            Turn visitors into <br className="hidden md:block" />
-            <span className="text-black/30 bg-clip-text">
+          <h1 className="flex flex-col items-center text-5xl md:text-8xl lg:text-[7.5rem] font-bold tracking-tighter text-black mb-10 leading-[1.1] md:leading-[1.05]">
+            <span className="block whitespace-nowrap">Turn visitors into</span>
+            <span className="relative inline-block h-[1.1em] min-w-[280px] md:min-w-[500px] text-black/30 text-center">
               {text}
               <motion.span 
                 animate={{ opacity: [1, 0, 1] }} 
                 transition={{ repeat: Infinity, duration: 0.8 }}
-                className="inline-block -ml-1 text-black/40"
+                className="inline-block w-[3px] h-[0.8em] bg-black/30 ml-1 mb-[-0.1em] align-middle"
               >
-                |
               </motion.span>
             </span>
           </h1>
@@ -165,7 +160,8 @@ export default function Hero() {
               <span>Trusted by local businesses</span>
             </div>
           </motion.div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   )
