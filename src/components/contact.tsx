@@ -98,6 +98,14 @@ export default function Contact() {
       
       setStatus("success")
       setFormData({ name: "", phone: "", business: "", message: "" })
+      
+      // GA4 Event Tracking
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'submit', {
+          event_category: 'Form',
+          event_label: 'Contact Form Submitted'
+        });
+      }
     } catch (error) {
       console.error("Email send failed:", error)
       setStatus("error")
@@ -326,6 +334,14 @@ export default function Contact() {
                     href="https://wa.me/919201655878?text=Hi%20Velora%20Labs%2C%20I%E2%80%99m%20interested%20in%20getting%20a%20website%20for%20my%20business.%20Can%20we%20discuss%3F"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => {
+                      if (typeof window !== 'undefined' && (window as any).gtag) {
+                        (window as any).gtag('event', 'click', {
+                          event_category: 'CTA',
+                          event_label: 'WhatsApp Click'
+                        });
+                      }
+                    }}
                     className="flex items-center justify-center gap-3 bg-white text-black px-10 py-5 rounded-full font-bold text-lg hover:bg-white/90 transition-all duration-300 shadow-2xl shadow-white/20 w-full sm:w-auto"
                   >
                     <MessageCircle size={24} />

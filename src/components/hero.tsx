@@ -125,6 +125,14 @@ export default function Hero() {
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
               href="#contact"
+              onClick={() => {
+                if (typeof window !== 'undefined' && (window as any).gtag) {
+                  (window as any).gtag('event', 'click', {
+                    event_category: 'CTA',
+                    event_label: 'Book a Free Call'
+                  });
+                }
+              }}
               className="group flex items-center justify-center gap-2 bg-black text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 w-full sm:w-auto shadow-2xl shadow-black/20 hover:shadow-black/40"
             >
               Book a Free Call
