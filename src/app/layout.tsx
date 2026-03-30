@@ -17,23 +17,21 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} font-sans antialiased text-black bg-white selection:bg-black selection:text-white min-h-screen flex flex-col`}>
-        {/* Google tag (gtag.js) */}
-        <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-EJX0HK2G2M"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-EJX0HK2G2M');
-          `}
-        </Script>
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{
+          __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id=GTM-NZTN6G7S'+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-NZTN6G7S');`
+        }} />
+      </head>
+      <body className={`${inter.variable} font-sans antialiased text-black bg-white selection:bg-black selection:text-white min-h-screen flex flex-col`} suppressHydrationWarning>
+        <noscript>
+          <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NZTN6G7S"
+          height="0" width="0" style={{display: 'none', visibility: 'hidden'}}></iframe>
+        </noscript>
         <div className="fixed inset-0 pointer-events-none z-[100] bg-noise opacity-[0.035] mix-blend-overlay" />
         <SmoothScroll>
           <div className="flex-1">

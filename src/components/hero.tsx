@@ -126,10 +126,10 @@ export default function Hero() {
               whileTap={{ scale: 0.98 }}
               href="#contact"
               onClick={() => {
-                if (typeof window !== 'undefined' && (window as any).gtag) {
-                  (window as any).gtag('event', 'click', {
-                    event_category: 'CTA',
-                    event_label: 'Book a Free Call'
+                if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                  (window as any).dataLayer.push({
+                    event: 'cta_click',
+                    label: 'Book Call'
                   });
                 }
               }}

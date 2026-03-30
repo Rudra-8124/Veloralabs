@@ -4,6 +4,7 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { MessageCircle, ArrowRight, Loader2, CheckCircle2, AlertCircle, ChevronDown, Search } from "lucide-react"
 import emailjs from "emailjs-com"
+import { useRouter } from "next/navigation"
 
 const COUNTRY_CODES = [
   { code: "+91", country: "India", flag: "🇮🇳" },
@@ -66,6 +67,7 @@ export default function Contact() {
   const [searchQuery, setSearchQuery] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
+  const router = useRouter()
 
   const filteredCodes = COUNTRY_CODES.filter(item => 
     item.country.toLowerCase().includes(searchQuery.toLowerCase()) || 
@@ -99,13 +101,18 @@ export default function Contact() {
       setStatus("success")
       setFormData({ name: "", phone: "", business: "", message: "" })
       
-      // GA4 Event Tracking
-      if (typeof window !== 'undefined' && (window as any).gtag) {
-        (window as any).gtag('event', 'submit', {
-          event_category: 'Form',
-          event_label: 'Contact Form Submitted'
+      // GA4 Event Tracking via dataLayer
+      if (typeof window !== 'undefined') {
+        (window as any).dataLayer = (window as any).dataLayer || [];
+        (window as any).dataLayer.push({
+          event: 'form_submit',
+          form_name: 'contact_form'
         });
       }
+      
+      // Redirect to Thank You Page
+      router.push('/thank-you')
+
     } catch (error) {
       console.error("Email send failed:", error)
       setStatus("error")
@@ -335,10 +342,10 @@ export default function Contact() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => {
-                      if (typeof window !== 'undefined' && (window as any).gtag) {
-                        (window as any).gtag('event', 'click', {
-                          event_category: 'CTA',
-                          event_label: 'WhatsApp Click'
+                      if (typeof window !== 'undefined') {
+                        (window as any).dataLayer = (window as any).dataLayer || [];
+                        (window as any).dataLayer.push({
+                          event: 'whatsapp_click'
                         });
                       }
                     }}
